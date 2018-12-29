@@ -3,9 +3,7 @@
 function estConnecte()
 {
     return isset($_SESSION['idUtilisateur']);
-    if($estVisiteurConnecte){
-        return ($_SESSION['statut']);
-    }else if ($estComptableConnecte){
+    
 }
 
 
