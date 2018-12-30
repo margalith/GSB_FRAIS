@@ -19,6 +19,7 @@ require_once 'includes/class.pdogsb.inc.php';
 session_start();// demarre une session 
 $pdo = PdoGsb::getPdoGsb(); //appel de la fonction 
 $estConnecte = estConnecte(); //valeurs v ou f en fonction si qq1 est connecte ou pas
+
 require 'vues/v_entete.php';
 $uc = filter_input(INPUT_GET, 'uc', FILTER_SANITIZE_STRING); // le filtre qui est appliquer qui va filtrer si c une char ou pas
 if ($uc && !$estConnecte) { //il faut qu il y est uc ET qu il ne soit pas connecte

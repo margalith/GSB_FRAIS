@@ -3,19 +3,23 @@
 function estConnecte()
 {
     return isset($_SESSION['idUtilisateur']);
-    
+       
 }
-
 
 function estVisiteurConnecte()
 {
-    return ($_SESSION['statut']);
+    if (estConnecte()) {
+    return ($_SESSION['statut']== 'visiteur');    
+    }
 }
 
 function estComptableConnecte()
 {
-    return ($_SESSION['statut']);
+     if (estConnecte()) {
+    return ($_SESSION['statut']=='comptable');
+    }
 }
+
 
 /**
  * Enregistre dans une variable session les infos d'un visiteur
@@ -26,7 +30,7 @@ function estComptableConnecte()
  * @param String $statut     staut de l'utilisateur
  * @return null
  */
-function connecter($idUtilisateur, $nom, $prenom)
+function connecter($idUtilisateur, $nom, $prenom,$statut)
 {
     $_SESSION['idUtilisateur'] = $idUtilisateur;
     $_SESSION['nom'] = $nom;

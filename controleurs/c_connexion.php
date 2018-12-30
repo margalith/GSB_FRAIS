@@ -24,12 +24,12 @@ case 'valideConnexion':
             $id = $visiteur['id'];
             $nom = $visiteur['nom'];
             $prenom = $visiteur['prenom'];
-            $statut = $statut ['statut'];
+            $statut = 'visiteur';
         } else{
             $id = $comptable ['id'];
             $nom = $comptable['nom'];
             $prenom = $comptable['prenom'];
-            $statut = $statut ['statut'];
+            $statut = 'comptable';
             
         }
         connecter($id, $nom, $prenom,$statut);
