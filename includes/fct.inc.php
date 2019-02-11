@@ -32,7 +32,7 @@ function estComptableConnecte()
  */
 function connecter($idUtilisateur, $nom, $prenom,$statut)
 {
-    $_SESSION['idUtilisateur'] = $idUtilisateur;
+    $_SESSION['idUtilisateur'] = $idUtilisateur; // pk changer ici et ne pas mettre idvisiteur
     $_SESSION['nom'] = $nom;
     $_SESSION['prenom'] = $prenom;
     $_SESSION['statut'] = $statut;
