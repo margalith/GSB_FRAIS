@@ -463,4 +463,28 @@ class PdoGsb
         $requetePrepare->bindParam(':unMois', $mois, PDO::PARAM_STR);
         $requetePrepare->execute();
     }
+    
+    
+    
+    
+    /**
+     * Retourne vrai si toutes les fiches du mois precdentes sont cloturées
+     * @return true
+     */
+    public function ficheDuMoisCloturee($moisPrecedent)
+    {
+       $boolReturn= false;
+       $requetePrepare = PdoGSB::$monPdo->prepare(
+            'SELECT ficheFrais.id '
+            . 'FROM ficheFrais'
+            . 'WHERE ficheFrais.idEtat = CR'
+            . 'AND ficheFrais.mois = :unMois'
+        ); 
+       $requetePrepare->bindparam(':unMois',$moisPrecedent, PDO::PARAM_STR);
+       $requetePrepare->execute();
+       if (!$requetePrepare->fetch()){ //retour de la fonction
+           $boolReturn =true;
+       }
+       return $boolReturn;
+    }
 }

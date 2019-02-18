@@ -2,7 +2,7 @@
 
 $idVisiteur = $_SESSION['idUtilisateur'];
 $mois = getMois(date('d/m/Y'));
-$numAnnee = substr($mois, 0, 4);
+$numAnnee = substr($mois, 0, 4);//extraire
 $numMois = substr($mois, 4, 2);
 $action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING);
 switch ($action) {

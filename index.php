@@ -1,18 +1,5 @@
 <?php
-/**
- * Index du projet GSB
- *
- * PHP Version 7
- *
- * @category  PPE
- * @package   GSB
- * @author    Réseau CERTA <contact@reseaucerta.org>
- * @author    José GIL <jgil@ac-nice.fr>
- * @copyright 2017 Réseau CERTA
- * @license   Réseau CERTA
- * @version   GIT: <0>
- * @link      http://www.reseaucerta.org Contexte « Laboratoire GSB »
- */
+
 
 require_once 'includes/fct.inc.php';
 require_once 'includes/class.pdogsb.inc.php';
@@ -39,6 +26,9 @@ case 'gererFrais':
     break;
 case 'etatFrais':
     include 'controleurs/c_etatFrais.php';
+    break;
+case 'valideFrais':
+    include 'controleurs/c_valideFrais.php';
     break;
 case 'deconnexion':
     include 'controleurs/c_deconnexion.php';
