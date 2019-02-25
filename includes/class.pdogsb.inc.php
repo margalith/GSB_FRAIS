@@ -68,13 +68,34 @@ class PdoGsb
         $requetePrepare->execute();
         return $requetePrepare->fetch();
     }
+    
+    
+    /**
+     * Fonction qui retourne la liste des visiteurs
+     *
+     * @param PDO $pdo instance de la classe PDO utilisée pour se connecter
+     *
+     * @return Array de visiteurs
+    */
+    function getLesVisiteurs($pdo)
+    {
+        $requetePrepare = PdoGsb::$monPdo->prepare( 
+           'SELECT * '
+           .'FROM visiteur '
+           .'ORDER BY nom DESC'
+        );
+        $requetePrepare->execute();
+        $lesVisiteurs = array();
+        return $requetePrepare->fetchAll();
+    }
+    
     public function getInfosComptable($login, $mdp)
     {
         $requetePrepare = PdoGsb::$monPdo->prepare(
             'SELECT comptable.id AS id, comptable.nom AS nom, '
             . 'comptable.prenom AS prenom '
             . 'FROM comptable '
-            . 'WHERE comptable.login = :unLogin AND comptable.mdp = :unMdp'
+            . 'WHERE comptable.login = :unLogin AND comptable.mdp = :unMdp '
         );
         $requetePrepare->bindParam(':unLogin', $login, PDO::PARAM_STR);
         $requetePrepare->bindParam(':unMdp', $mdp, PDO::PARAM_STR);
@@ -410,6 +431,23 @@ class PdoGsb
         return $lesMois;
     }
 
+     /**
+     * Fonction qui retourne le mois (au format ID GSB : aaaamm) à partir d'une
+     * date passée en paramètre
+     *
+     * @param String $date Date à utiliser pour extraire le mois
+     *
+     * @return String avec le mois au format aaaamm
+     */
+    function getMois($date)
+    {
+        @list($jour, $mois, $annee) = explode('/', $date);
+        unset($jour);
+        if (strlen($mois) == 1) {
+            $mois = '0' . $mois;
+        }
+        return $annee . $mois;
+    }
     /**
      * Retourne les informations d'une fiche de frais d'un visiteur pour un
      * mois donné

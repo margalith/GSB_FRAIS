@@ -268,3 +268,22 @@ function nbErreurs()
         return count($_REQUEST['erreurs']);
     }
 }
+
+
+/**
+ * Affiche les 12 derniers mois a partir du mois precedent
+ */
+function getLesDouzeDerniersMois($mois){
+   $lesMois= array();
+   for ($k=0;$k<=12;$k++){
+       $mois= getMoisPrecedent($mois);
+       $numAnnee = substr($mois,0,4);
+       $numMois = substr($mois,4,2);
+       $lesMois [] = array(
+           'mois'=> $mois,
+           'numAnnee'=> $numAnnee,
+           'numMois'=> $numMois
+       );
+   }
+   return $lesMois;
+}
