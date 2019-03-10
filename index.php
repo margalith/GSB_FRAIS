@@ -3,20 +3,18 @@
 
 require_once 'includes/fct.inc.php';
 require_once 'includes/class.pdogsb.inc.php';
-session_start();// demarre une session 
-$pdo = PdoGsb::getPdoGsb(); //appel de la fonction 
-$estConnecte = estConnecte(); //valeurs v ou f en fonction si qq1 est connecte ou pas
-$estVisiteurConnecte= estVisiteurConnecte ();
-$estComptableConnecte =estComptableConnecte();
- 
+session_start();
+$pdo = PdoGsb::getPdoGsb();
+$estConnecte = estConnecte();
+
 require 'vues/v_entete.php';
-$uc = filter_input(INPUT_GET, 'uc', FILTER_SANITIZE_STRING); // le filtre qui est appliquer qui va filtrer si c une char ou pas
-if ($uc && !$estConnecte) { //il faut qu il y est uc ET qu il ne soit pas connecte
+$uc = filter_input(INPUT_GET, 'uc', FILTER_SANITIZE_STRING);
+if ($uc && ! $estConnecte) {
     $uc = 'connexion';
 } elseif (empty($uc)) {
     $uc = 'accueil';
 }
-switch ($uc) {
+switch ($uc) { // pr eviter de faire plrs test :switch et case c tt les test /possibilite
 case 'connexion':
     include 'controleurs/c_connexion.php';
     break;
@@ -29,8 +27,8 @@ case 'gererFrais':
 case 'etatFrais':
     include 'controleurs/c_etatFrais.php';
     break;
-case 'valideFrais':
-    include 'controleurs/c_valideFrais.php';
+case 'validerFrais':
+    include 'controleurs/c_validerFrais.php';
     break;
 case 'deconnexion':
     include 'controleurs/c_deconnexion.php';

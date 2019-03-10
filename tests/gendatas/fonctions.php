@@ -1,7 +1,6 @@
 <?php
 
 
-
 /**
  * Fonction qui retourne la liste des visiteurs
  *

@@ -1,43 +1,60 @@
 <?php
 
+
+/**
+ * Teste si un quelconque utilisateur est connecté
+ *
+ * @return vrai ou faux
+ */
 function estConnecte()
 {
     return isset($_SESSION['idUtilisateur']);
-       
 }
+/**
+ * Teste si un visiteur est connecté
+ *
+ * @return vrai ou faux
+ * 
+ */
 
 function estVisiteurConnecte()
 {
-    if (estConnecte()) {
-    return ($_SESSION['statut']== 'visiteur');    
-    }
+    if (estConnecte()){
+        return ($_SESSION['statut']== 'visiteur');
+    }   
 }
+
+/**
+ * Teste si un comptable est connecté
+ *
+ * @return vrai ou faux
+ */
 
 function estComptableConnecte()
 {
-     if (estConnecte()) {
-    return ($_SESSION['statut']=='comptable');
-    }
+    if (estConnecte()){
+        return ($_SESSION['statut'] == 'comptable');
+    }   
 }
 
-
 /**
- * Enregistre dans une variable session les infos d'un visiteur
+ * Enregistre dans une variable session les infos d'un Utilisateur
  *
- * @param String $idUtilisateur ID de l'utilisateur
- * @param String $nom        Nom de l'utilisateur
- * @param String $prenom     Prénom de l'utilisateur
- * @param String $statut     staut de l'utilisateur
+ * @param String $idVisiteur ID de l' Utilisateur
+ * @param String $nom        Nom de l' Utilisateur
+ * @param String $prenom     Prénom de l'Utilisateur
+ *
  * @return null
  */
-function connecter($idUtilisateur, $nom, $prenom,$statut)
+function connecter($idUtilisateur, $nom, $prenom, $statut)
 {
-    $_SESSION['idUtilisateur'] = $idUtilisateur; // pk changer ici et ne pas mettre idvisiteur
+    $_SESSION['idUtilisateur'] = $idUtilisateur;
     $_SESSION['nom'] = $nom;
     $_SESSION['prenom'] = $prenom;
     $_SESSION['statut'] = $statut;
 }
 
+    
 /**
  * Détruit la session active
  *
@@ -116,6 +133,7 @@ function getMoisPrecedent($mois)
     }
     return $numAnnee . $numMois;
 }
+
 
 /* gestion des erreurs */
 
@@ -249,7 +267,7 @@ function valideInfosFrais($dateFrais, $libelle, $montant)
  */
 function ajouterErreur($msg)
 {
-    if (!isset ($_REQUEST['erreurs'])) { //isset: pr svoir si elle existe ou pas
+    if (!isset($_REQUEST['erreurs'])) {
         $_REQUEST['erreurs'] = array();
     }
     $_REQUEST['erreurs'][] = $msg;
@@ -269,21 +287,23 @@ function nbErreurs()
     }
 }
 
-
 /**
- * Affiche les 12 derniers mois a partir du mois precedent
+ * Retourne une liste des douzes mois précédents du mois précédent
+ * 
+ * @return Array liste des mois
  */
 function getLesDouzeDerniersMois($mois){
-   $lesMois= array();
-   for ($k=0;$k<=12;$k++){
-       $mois= getMoisPrecedent($mois);
-       $numAnnee = substr($mois,0,4);
-       $numMois = substr($mois,4,2);
-       $lesMois [] = array(
-           'mois'=> $mois,
-           'numAnnee'=> $numAnnee,
-           'numMois'=> $numMois
-       );
-   }
-   return $lesMois;
+    $lesMois= array();
+    for ($k=0;$k<=12;$k++){
+        $mois= getMoisPrecedent($mois);
+        $numAnnee = substr($mois,0,4);
+        $numMois = substr($mois,4,2);
+        $lesMois [] = array(
+            'mois'=> $mois,
+            'numAnnee'=> $numAnnee,
+            'numMois'=> $numMois
+        );
+    }
+    return $lesMois;
 }
+
