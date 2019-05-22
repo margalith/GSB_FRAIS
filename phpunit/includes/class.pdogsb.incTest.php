@@ -54,9 +54,8 @@ class PdoGsbTest extends PHPUnit_Framework_TestCase {
      */
     public function testGetInfosVisiteur() {
         // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        
+        $this->assertTrue(false);
     }
 
     /**
